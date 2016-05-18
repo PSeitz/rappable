@@ -39,6 +39,11 @@ describe('rappable', function() {
         expect(rappable.isRappable("besten", "diesen", 'de')).to.be.true;
 
     });
+
+    it('should not be rappable in german', function () {
+        // expect(rappable.isRappable("sein", "berlin", 'de')).to.be.false;
+        expect(rappable.isRappable("sind", "und", 'de')).to.be.false;
+    });
 });
 
 

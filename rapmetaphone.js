@@ -189,42 +189,6 @@ String.prototype.endsWith = function(suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
-Metaphone.isGoodToRap = function(stringA, stringB) {
-    var val1 = this.process(stringA);
-    var val2 = this.process(stringB);
-
-    var numLastCharsToCheck = 3;
-    var length1 = val1.length;
-    var length2 = val2.length;
-    if (length1 <= 3 || length2 <= 3) {
-        numLastCharsToCheck = 2;
-    }
-    if (length1 <= 2 && length2 >= 2) {
-        numLastCharsToCheck = length1;
-    }
-    if (length2 <= 2 && length1 >= 2) {
-        numLastCharsToCheck = length2;
-    }
-    if (length1 <= 2 && length2 <= 2) {
-        numLastCharsToCheck = 1;
-    }
-    if (length1 == 2 && length2 == 2) {
-        numLastCharsToCheck = 2;
-    }
-    if (length1 == 1 && length2 >= 3 || length2 == 1 && length1 >= 3) {
-        return false;
-    }
-    if (length1 == 2 && length2 >= 4 || length2 == 2 && length1 >= 4) {
-        return false;
-    }
-    var lastX = val2.slice(-numLastCharsToCheck);
-    if (val1.endsWith(lastX)) {
-        return true;
-    }
-    return false;
-};
-
-
 Metaphone.attach = function() {
     var phonetic = this;
 

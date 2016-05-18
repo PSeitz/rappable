@@ -51,6 +51,11 @@ function isRappable(word1, word2, lang) {
             numLastCharsToCheck = Math.min(numLastCharsToCheck, 2);
         }
     }
+
+    if (!val1.charAt(val1.length - 2).match(/[aeiou]/i)) { // for 'and' 'und'
+        numLastCharsToCheck = Math.max(numLastCharsToCheck, 3);
+    }
+
     var lastX = val2.slice(-numLastCharsToCheck);
     if (val1.endsWith(lastX)) {
         return true;

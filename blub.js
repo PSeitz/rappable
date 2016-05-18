@@ -8,4 +8,5 @@ console.log(koellnrap("ratatatan"));
 
 console.log(rappable.isRappable("achterbahn", "ratatatan", 'de'));
 
-
+console.log(koellnrap("einem"));
+console.log(koellnrap("eingenommen"));

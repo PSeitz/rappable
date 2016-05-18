@@ -2,7 +2,7 @@ var metaphone = require('./rapmetaphone');
 
 var service = {};
 
-functions isRappable(word1, word2, lang){
+function isRappable(word1, word2, lang){
     if (!lang || lang = 'en') 
     {
         return metaphone.isGoodToRap(word1, word2);

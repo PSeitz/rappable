@@ -37,6 +37,7 @@ describe('rappable', function() {
 
         expect(rappable.isRappable("beauftragt", "versagt", 'de')).to.be.true;
         expect(rappable.isRappable("besten", "diesen", 'de')).to.be.true;
+        expect(rappable.isRappable("reis", "mais", 'de')).to.be.true;
 
     });
 
@@ -44,6 +45,7 @@ describe('rappable', function() {
         // expect(rappable.isRappable("sein", "berlin", 'de')).to.be.false;
         expect(rappable.isRappable("sind", "und", 'de')).to.be.false;
         expect(rappable.isRappable("einem", "eingenommen", 'de')).to.be.false;
+        expect(rappable.isRappable("vielleicht", "nicht", 'de')).to.be.false;
     });
 });
 

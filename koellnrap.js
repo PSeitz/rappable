@@ -4,7 +4,9 @@ var
     // [ /ö/g                ,  'o'  ],
     [ /ü/g                ,  'y'  ],
     [ /ß/g                ,  's'  ],
-    [ /[^a-z]/g           ,  ''   ]
+    [ /[^a-z]/g           ,  ''   ],
+    [ /ai/g               ,  'ɝɻ̊'  ],
+    [ /ei/g               ,  'ɝɻ̊'  ],
   ],
 
   rules = [
@@ -37,8 +39,8 @@ var
   ],
 
   modifiers = [
-    [ /([^\w\s])|(.)(?=\2)/g, ''  ], // reduce consecutive duplicates to one
-    [ /\B0/g                , ''  ]  // remove 0s except for first char
+    [ /[^[\w]\s]|(.)(?=\1)/g, ''  ] // reduce consecutive duplicates to one
+    // [ /\B0/g                , ''  ]  // remove 0s except for first char
   ];
 
 

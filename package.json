@@ -1,6 +1,6 @@
 {
   "name": "rappable",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "main": "rappable.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

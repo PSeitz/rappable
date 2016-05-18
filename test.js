@@ -20,7 +20,6 @@ describe('rappable', function() {
     });
 
     it('should not be rappable in english', function () {
-
         expect(rappable.isRappable("tastatur", "rumrum")).to.be.false;
         expect(rappable.isRappable("nice", "house")).to.be.false;
         expect(rappable.isRappable("the", "above")).to.be.false;
@@ -31,11 +30,13 @@ describe('rappable', function() {
     });
 
     it('should be rappable in german', function () {
-
         expect(rappable.isRappable("achterbahn", "ratatatan", 'de')).to.be.true;
         expect(rappable.isRappable("richtig", "nichtig", 'de')).to.be.true;
         expect(rappable.isRappable("richtig", "ehrlich", 'de')).to.be.true;
         expect(rappable.isRappable("krass", "nass", 'de')).to.be.true;
+
+        expect(rappable.isRappable("beauftragt", "versagt", 'de')).to.be.true;
+        expect(rappable.isRappable("besten", "diesen", 'de')).to.be.true;
 
     });
 });

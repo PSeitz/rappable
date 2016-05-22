@@ -13,5 +13,23 @@ var rappable = require('./rappable');
 
 
 // console.log(koellnrap("vielleicht"));
-console.log(koellnrap("mais"));
-console.log(koellnrap("reis"));
+// console.log(koellnrap("mais"));
+// console.log(koellnrap("reis"));
+
+// console.log(koellnrap("lebertran"));
+// console.log(koellnrap("kram,"));
+
+
+var metaphone = require('./rapmetaphone');
+
+// console.log(metaphone.process("eepeople,"));
+// console.log(metaphone.process("eewhile,"));
+
+
+var hyphenator = require('./hyphenator');
+// console.log(rappable.getRapValue("einem", "eingenommen", "de"))
+// console.log(rappable.getRapValue("lebertran", "kram", "de"))
+// console.log(rappable.getRapValue("people,", "while,"))
+console.log(rappable.getRapValue("Germany", "Company"))
+
+

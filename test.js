@@ -14,7 +14,7 @@ describe('rappable', function() {
         expect(rappable.isRappable("beat", "fleet")).to.be.true;
         expect(rappable.isRappable("cream", "seem")).to.be.true;
         expect(rappable.isRappable("fine", "rhine")).to.be.true;
-        expect(rappable.isRappable("fabolous", "abaskous")).to.be.true;
+        expect(rappable.isRappable("fabolous", "abakous")).to.be.true;
         expect(rappable.isRappable("laptop", "tanktop")).to.be.true;
         
     });
@@ -26,7 +26,7 @@ describe('rappable', function() {
         expect(rappable.isRappable("on", "humiliation")).to.be.false;
         expect(rappable.isRappable("the", "be")).to.be.false;
         expect(rappable.isRappable("will", "all")).to.be.false;
-        
+        // expect(rappable.isRappable("people,", "while,")).to.be.false;
     });
 
     it('should be rappable in german', function () {
@@ -38,6 +38,9 @@ describe('rappable', function() {
         expect(rappable.isRappable("beauftragt", "versagt", 'de')).to.be.true;
         expect(rappable.isRappable("besten", "diesen", 'de')).to.be.true;
         expect(rappable.isRappable("reis", "mais", 'de')).to.be.true;
+        expect(rappable.isRappable("lebertran", "kram", 'de')).to.be.true;
+
+        expect(rappable.isRappable("fabolus", "abakus", 'de')).to.be.true;
 
     });
 

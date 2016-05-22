@@ -20,6 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+
+function removecrap(token) {
+    return token.replace(/[^a-z]/g, '');
+}
+
 function dedup(token) {
     return token.replace(/([^ceo])\1/g, '$1');
 }
@@ -123,6 +128,10 @@ function dropY(token) {
     return token.replace(/y([^aeiou]|$)/g, '$1');
 }
 
+function dropEndY(token) {
+    return token.replace(/y$/g, 'e');
+}
+
 function transformZ(token) {
     return token.replace(/z/, 's');
 }
@@ -131,10 +140,11 @@ function transformVowels(token) {
     return token.replace(/ea/, 'ee');
 }
 
-// function transformAnkAnd(token) {
-//     return token.replace(/ank/, 'ænk');
-//     return token.replace(/and/, 'ænd');
-// }
+function transformSpecials(token) {
+    token = token.replace(/ank/i, 'ænk');
+    token = token.replace(/and/i, 'ænd');
+    return token.replace(/the/i, 'thæ');
+}
 
 
 
@@ -148,8 +158,10 @@ module.exports = Metaphone;
 Metaphone.process = function(token, maxLength) {
     maxLength == maxLength || 32;
     token = token.toLowerCase();
+    token = removecrap(token);
     token = dedup(token);
     token = dropInitialLetters(token);
+    token = transformSpecials(token);
     token = dropBafterMAtEnd(token);
     token = transformCK(token);
     token = cTransform(token);
@@ -167,10 +179,10 @@ Metaphone.process = function(token, maxLength) {
     token = transformWH(token);
     token = dropW(token);
     // token = dropY(token);
+    token = dropEndY(token);
     token = transformZ(token);
 
     token = transformVowels(token);
-
     // token = dropVowels(token);
     
     token.toUpperCase();

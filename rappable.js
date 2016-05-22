@@ -76,10 +76,10 @@ function isRappable(word1, word2, lang) {
 
 function convertToNormalizedSyllables(word, lang){
     var func = getFuncForLang(lang);
-    console.log(hyphenator.hyphenateWord("de", word).split("­­"));
+    // console.log(hyphenator.hyphenateWord("de", word).split("­­"));
     word = hyphenator.hyphenateWord("de", word).split("-");
     for (var i = 0; i < word.length; i++) {
-        console.log(word[i]);
+        // console.log(word[i]);
         word[i] = func(word[i]);
     }
     return word;
@@ -133,8 +133,8 @@ function getRapValue(word1, word2, lang) {
     word1 = convertToNormalizedSyllables(word1, lang)
     word2 = convertToNormalizedSyllables(word2, lang)
 
-    console.log(word1);
-    console.log(word2);
+    // console.log(word1);
+    // console.log(word2);
 
     // var end = Math.min(3, Math.min(word1.length, word2.length));
 
@@ -163,34 +163,34 @@ function getRapValue(word1, word2, lang) {
         //     syllableVal += 2;
 
 
-        console.log("getPrefix("+s1+"):" + getPrefix(s1));
-        console.log("getPrefix("+s2+"):" + getPrefix(s2));
+        // console.log("getPrefix("+s1+"):" + getPrefix(s1));
+        // console.log("getPrefix("+s2+"):" + getPrefix(s2));
 
-        console.log("getSuffix("+s1+"):" + getSuffix(s1));
-        console.log("getSuffix("+s2+"):" + getSuffix(s2));
+        // console.log("getSuffix("+s1+"):" + getSuffix(s1));
+        // console.log("getSuffix("+s2+"):" + getSuffix(s2));
         // if (j == 0 ) // last syllable
         //     syllableVal = syllableVal * 4;
 
         syllableVal = Math.pow(syllableVal, 1/j);
         score += syllableVal;
-        console.log(s1 + " " +s2 + " " + syllableVal);
+        // console.log(s1 + " " +s2 + " " + syllableVal);
     }
 
     var numSyl1 = word1.length;
     var numSyl2 = word2.length;
-    console.log(score);
+    // console.log(score);
     if (Math.abs(numSyl2 - numSyl1) >= 2) {
         var maxSyl = Math.max(numSyl1, numSyl2) 
         var minSyl = Math.min(numSyl1, numSyl2) 
         score = score * (minSyl + 6) / (maxSyl + 6)
     }
     
-    console.log(score);
+    // console.log(score);
 
     return score;
 
-    // console.log(hyphenator.hyphenateWord("de", word1))
-    // console.log(hyphenator.hyphenateWord("de", word2))
+    console.log(hyphenator.hyphenateWord("de", word1))
+    console.log(hyphenator.hyphenateWord("de", word2))
 
     //a, e, i, o, u, ä, ö, ü
 }

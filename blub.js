@@ -37,8 +37,9 @@ var hyphenator = require('./hyphenator');
 
 // console.log(rappable.getRapValue("krass", "nass", "de", true))
 
-console.log(rappable.getRapValue("believe", "achieve", "en-gb", true))
+// console.log(rappable.getRapValue("believe", "achieve", "en-gb", true))
 
-console.log(hyphenator.hyphenateWord('en', "achieve"));
+// console.log(hyphenator.hyphenateWord('en', "achieve"));
 
 
+console.log(rappable.getRapValue("wollten", "geschichte", "de", true))

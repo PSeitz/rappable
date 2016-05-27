@@ -39,7 +39,9 @@ describe('rappable', function() {
         { comp:["einem", "eingenommen"],       lang:'de', value:false},
         { comp:["vielleicht", "nicht"],        lang:'de', value:false},
         { comp:["Freund", "und"],              lang:'de', value:false},
-        { comp:["Staaten", "Machthaber"],      lang:'de', value:false}
+        { comp:["Staaten", "Machthaber"],      lang:'de', value:false},
+        { comp:["amerikanischen", "Wirtschaftskatastrophe"],      lang:'de', value:false},
+        { comp:["wollten", "Geschichte"],      lang:'de', value:false}
 
     ];
 

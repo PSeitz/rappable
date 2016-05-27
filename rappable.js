@@ -21,52 +21,7 @@ function getFuncForLang(lang){
     }
 }
 
-
-// function isRappable(word1, word2, lang) {
-//     var func = getFuncForLang(lang);
-//     var val1 = func(word1);
-//     var val2 = func(word2);
-
-//     var numLastCharsToCheck = 3;
-//     var length1 = val1.length;
-//     var length2 = val2.length;
-//     if (length1 <= 3 || length2 <= 3) {
-//         numLastCharsToCheck = 2;
-//     }
-//     if (length1 <= 2 && length2 >= 2) {
-//         numLastCharsToCheck = length1;
-//     }
-//     if (length2 <= 2 && length1 >= 2) {
-//         numLastCharsToCheck = length2;
-//     }
-//     if (length1 <= 2 && length2 <= 2) {
-//         numLastCharsToCheck = 1;
-//     }
-//     if (length1 == 2 && length2 == 2) {
-//         numLastCharsToCheck = 2;
-//     }
-//     if (length1 == 1 && length2 >= 3 || length2 == 1 && length1 >= 3) {
-//         return false;
-//     }
-//     if (length1 == 2 && length2 >= 4 || length2 == 2 && length1 >= 4) {
-//         return false;
-//     }
-//     if (lang == 'de') {
-//         if (val1.charAt(val1.length - 2).match(/[aeiou]/i) && val2.charAt(val2.length - 2).match(/[aeiou]/i)) {
-//             numLastCharsToCheck = Math.min(numLastCharsToCheck, 2);
-//         }
-//     }
-
-//     if (!val1.charAt(val1.length - 2).match(/[aeiou]/i)) { // for 'and' 'und'
-//         numLastCharsToCheck = Math.max(numLastCharsToCheck, 3);
-//     }
-
-//     var lastX = val2.slice(-numLastCharsToCheck);
-//     if (val1.endsWith(lastX)) {
-//         return true;
-//     }
-//     return false;
-// };
+// var tonlautList=[a|e|i|o|u|ɝ|ɻ̊|ä|ü|ö];
 
 function isRappable(word1, word2, lang) {
     if (!lang) lang = 'en';
@@ -91,21 +46,21 @@ function checkReturnMatch(match){
 }
 
 function getPrefix(syllable){
-    var match = syllable.match(/.+?(?=[a|e|i|o|u|ɝ|ɻ̊|ä|ü|ö])/gi)
+    var match = syllable.match(/.+?(?=[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö])/gi)
     return checkReturnMatch(match);
 }
 
 function getSuffix(syllable){
-    var match = syllable.match(/[a|e|i|o|u|ɝ|ɻ̊|ä|ü|ö]+(.*)/gi)
-    // var match = syllable.match(/(?<=[a|e|i|o|u|ɝ|ɻ̊|ä|ü|ö]).*/gi)
-    // var match = syllable.match(/(?<=[a|e|i|o|u|ɝ|ɻ̊|ä|ü|ö])(.*)/gi)
+    var match = syllable.match(/[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]+(.*)/gi)
+    // var match = syllable.match(/(?<=[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]).*/gi)
+    // var match = syllable.match(/(?<=[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö])(.*)/gi)
 
     match = checkReturnMatch(match);
-    return match.replace(/[a|e|i|o|u|ɝ|ɻ̊|ä|ü|ö]*/gi, '')
+    return match.replace(/[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]*/gi, '')
 }
 
 function getSelbstLautBlock(syllable){
-    var match = syllable.match(/([a|e|i|o|u|ɝ|ɻ̊|ä|ü|ö]+)/gi)
+    var match = syllable.match(/([a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]+)/gi)
     return checkReturnMatch(match);
 }
 

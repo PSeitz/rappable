@@ -44,4 +44,7 @@ var hyphenator = require('./hyphenator');
 
 // console.log(rappable.getRapValue("wollten", "geschichte", "de", true))
 
-console.log(rappable.getRapValue("regeln", "mögliche", "de", true))
+// console.log(rappable.getRapValue("regeln", "mögliche", "de", true))
+
+console.log(rappable.getRapValue("jeder", "des", "de", true))
+

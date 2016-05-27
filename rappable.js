@@ -46,17 +46,17 @@ function checkReturnMatch(match){
 }
 
 function getPrefix(syllable){
-    var match = syllable.match(/.+?(?=[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö])/gi)
+    var match = syllable.match(/.+?(?=[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö])/gi)
     return checkReturnMatch(match);
 }
 
 function getSuffix(syllable){
-    var match = syllable.match(/[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]+(.*)/gi)
-    // var match = syllable.match(/(?<=[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]).*/gi)
-    // var match = syllable.match(/(?<=[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö])(.*)/gi)
+    var match = syllable.match(/[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]+(.*)/gi)
+    // var match = syllable.match(/(?<=[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]).*/gi)
+    // var match = syllable.match(/(?<=[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö])(.*)/gi)
 
     match = checkReturnMatch(match);
-    return match.replace(/[a|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]*/gi, '')
+    return match.replace(/[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]*/gi, '')
 }
 
 function getSelbstLautBlock(syllable){

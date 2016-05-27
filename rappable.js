@@ -97,6 +97,7 @@ function getRapValue(word1, word2, lang, debug) {
 
     var check = Math.min(word1.length, word2.length);
 
+    var firstScore=8;
     var score = 0;
     var j = 0;
     for (var i = check; i --> 0;) {
@@ -113,17 +114,8 @@ function getRapValue(word1, word2, lang, debug) {
         else if(j == 0 )
             break;
 
-        // if (getPrefix(s1) && (getPrefix(s1) == getPrefix(s2)))
-        //     syllableVal += 2;
-
-        // if (getSuffix(s1) && (getSuffix(s1) == getSuffix(s2)))
-        //     syllableVal += 2;
-
-        
-        // if (j == 0 ) // last syllable
-        //     syllableVal = syllableVal * 4;
-
-        syllableVal = Math.pow(syllableVal, 1/j);
+        syllableVal = Math.pow(syllableVal, 1/j) * firstScore / 8;
+        if (j==1) firstScore = syllableVal;
         score += syllableVal;
         if (debug) {
             console.log("getPrefix("+s1+"):" + getPrefix(s1));

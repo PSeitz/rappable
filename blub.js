@@ -46,5 +46,6 @@ var hyphenator = require('./hyphenator');
 
 // console.log(rappable.getRapValue("regeln", "mögliche", "de", true))
 
-console.log(rappable.getRapValue("jeder", "des", "de", true))
+// console.log(rappable.getRapValue("jeder", "des", "de", true))
 
+console.log(rappable.getRapValue("Bolschewismus", "Weiterbildung", "de", true))

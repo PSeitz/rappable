@@ -68,6 +68,7 @@ function getSuffixPrefixScore(s1, s2, func){
     var pref1 = func(s1);
     var pref2 = func(s2);
     if (!pref1 && !pref2) { return 1; }
+    if (!pref1 && pref2 || pref1 && !pref2)  { return 0.6; }
     if (pref1) {
         if (pref1 == pref2)
             return 1.75;

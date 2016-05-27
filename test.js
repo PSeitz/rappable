@@ -5,51 +5,53 @@ var rappable = require('./rappable');
 var expect = require('chai').expect;
 var assert = require('chai').assert;
 describe('rappable', function() {
-    it('should be rappable in english', function () {
 
-        expect(rappable.isRappable("Germany", "Company")).to.be.true;
-        expect(rappable.isRappable("see", "knee")).to.be.true;
-        expect(rappable.isRappable("primitive", "expensive")).to.be.true;
-        expect(rappable.isRappable("believe", "achieve")).to.be.true;
-        expect(rappable.isRappable("beat", "fleet")).to.be.true;
-        expect(rappable.isRappable("cream", "seem")).to.be.true;
-        expect(rappable.isRappable("fine", "rhine")).to.be.true;
-        expect(rappable.isRappable("fabolous", "abakous")).to.be.true;
-        expect(rappable.isRappable("laptop", "tanktop")).to.be.true;
-        
-    });
+    var tests = [
+        { comp:["Germany", "Company"],          lang:'en', value:true},
+        { comp:["see", "knee"],                 lang:'en', value:true},
+        { comp:["primitive", "expensive"],      lang:'en', value:true},
+        { comp:["believe", "achieve"],          lang:'en', value:true},
+        { comp:["beat", "fleet"],               lang:'en', value:true},
+        { comp:["cream", "seem"],               lang:'en', value:true},
+        { comp:["fine", "rhine"],               lang:'en', value:true},
+        { comp:["fabolous", "abakous"],         lang:'en', value:true},
+        { comp:["laptop", "tanktop"],           lang:'en', value:true},
 
-    it('should not be rappable in english', function () {
-        expect(rappable.isRappable("tastatur", "rumrum")).to.be.false;
-        expect(rappable.isRappable("nice", "house")).to.be.false;
-        expect(rappable.isRappable("the", "above")).to.be.false;
-        expect(rappable.isRappable("on", "humiliation")).to.be.false;
-        expect(rappable.isRappable("the", "be")).to.be.false;
-        expect(rappable.isRappable("will", "all")).to.be.false;
-        // expect(rappable.isRappable("people,", "while,")).to.be.false;
-    });
+        { comp:["tastatur", "rumrum"],         lang:'en', value:false},
+        { comp:["nice", "house"],              lang:'en', value:false},
+        { comp:["the", "above"],               lang:'en', value:false},
+        { comp:["on", "humiliation"],          lang:'en', value:false},
+        { comp:["the", "be"],                  lang:'en', value:false},
+        { comp:["will", "all"],                lang:'en', value:false},
 
-    it('should be rappable in german', function () {
-        expect(rappable.isRappable("achterbahn", "ratatatan", 'de')).to.be.true;
-        expect(rappable.isRappable("richtig", "nichtig", 'de')).to.be.true;
-        expect(rappable.isRappable("richtig", "ehrlich", 'de')).to.be.true;
-        expect(rappable.isRappable("krass", "nass", 'de')).to.be.true;
+        { comp:["achterbahn", "ratatatan"],    lang:'de', value:true},
+        { comp:["richtig", "nichtig"],         lang:'de', value:true},
+        { comp:["richtig", "ehrlich"],         lang:'de', value:true},
+        { comp:["krass", "nass"],              lang:'de', value:true},
+        { comp:["beauftragt", "versagt"],      lang:'de', value:true},
+        { comp:["besten", "diesen"],           lang:'de', value:true},
+        { comp:["reis", "mais"],               lang:'de', value:true},
+        { comp:["lebertran", "kram"],          lang:'de', value:true},
+        { comp:["fabolus", "abakus"],          lang:'de', value:true},
 
-        expect(rappable.isRappable("beauftragt", "versagt", 'de')).to.be.true;
-        expect(rappable.isRappable("besten", "diesen", 'de')).to.be.true;
-        expect(rappable.isRappable("reis", "mais", 'de')).to.be.true;
-        expect(rappable.isRappable("lebertran", "kram", 'de')).to.be.true;
+        { comp:["sein", "berlin"],             lang:'de', value:false},
+        { comp:["sind", "und"],                lang:'de', value:false},
+        { comp:["einem", "eingenommen"],       lang:'de', value:false},
+        { comp:["vielleicht", "nicht"],        lang:'de', value:false},
+        { comp:["Freund", "und"],              lang:'de', value:false},
+        { comp:["Staaten", "Machthaber"],      lang:'de', value:false}
 
-        expect(rappable.isRappable("fabolus", "abakus", 'de')).to.be.true;
+    ];
 
-    });
-
-    it('should not be rappable in german', function () {
-        expect(rappable.isRappable("sein", "berlin", 'de')).to.be.false;
-        expect(rappable.isRappable("sind", "und", 'de')).to.be.false;
-        expect(rappable.isRappable("einem", "eingenommen", 'de')).to.be.false;
-        expect(rappable.isRappable("vielleicht", "nicht", 'de')).to.be.false;
-        expect(rappable.isRappable("Freund", "und", 'de')).to.be.false;
+    tests.forEach(function(test) {
+        it('should ' + (test.value ? '':'not') + ' be rappable in ' + test.lang + ' ' + test.comp[0] + ' ' + test.comp[1], function() {
+            if (test.value) {
+                expect(rappable.isRappable(test.comp[0], test.comp[1], test.lang)).to.be.true;
+            }else{
+                expect(rappable.isRappable(test.comp[0], test.comp[1], test.lang)).to.be.false;
+            }
+            
+        });
     });
 });
 

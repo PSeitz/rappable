@@ -30,6 +30,15 @@ var hyphenator = require('./hyphenator');
 // console.log(rappable.getRapValue("einem", "eingenommen", "de"))
 // console.log(rappable.getRapValue("lebertran", "kram", "de"))
 // console.log(rappable.getRapValue("people,", "while,"))
-console.log(rappable.getRapValue("Germany", "Company"))
+// console.log(rappable.getRapValue("Germany", "Company"))
+
+// console.log(rappable.getRapValue("Staaten", "Machthaber", "de", true))
+
+
+// console.log(rappable.getRapValue("krass", "nass", "de", true))
+
+console.log(rappable.getRapValue("believe", "achieve", "en-gb", true))
+
+console.log(hyphenator.hyphenateWord('en', "achieve"));
 
 

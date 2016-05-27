@@ -14,7 +14,7 @@ var service = {};
 //     }
 // }
 function getFuncForLang(lang){
-    if (!lang || lang == 'en') {
+    if (!lang || lang == 'en' || lang == 'en-us' || lang == 'en-gb') {
         return metaphone.process;
     }else if(lang == 'de'){
         return koellnrap;
@@ -77,7 +77,7 @@ function isRappable(word1, word2, lang) {
 function convertToNormalizedSyllables(word, lang){
     var func = getFuncForLang(lang);
     // console.log(hyphenator.hyphenateWord("de", word).split("­­"));
-    word = hyphenator.hyphenateWord("de", word).split("-");
+    word = hyphenator.hyphenateWord('de', word).split("-");
     for (var i = 0; i < word.length; i++) {
         // console.log(word[i]);
         word[i] = func(word[i]);
@@ -112,30 +112,31 @@ function getSelbstLautBlock(syllable){
 function getSuffixPrefixScore(s1, s2, func){
     var pref1 = func(s1);
     var pref2 = func(s2);
+    if (!pref1 && !pref2) { return 1; }
     if (pref1) {
         if (pref1 == pref2)
-            return 2;
+            return 1.75;
         else{
             for (var i = 0; i < pref1.length; i++) {
                 if(pref1[i] && pref2[i] && pref1[i] == pref2[i] ){
-                    return 1;
+                    return 1.25;
                 }
             }
         }
     }
-    else if(pref1){
-
-    }
-    return 0;
+    return 0.8;
 }
 
-function getRapValue(word1, word2, lang) {
+function getRapValue(word1, word2, lang, debug) {
+    if (!lang) lang = 'en';
+
     word1 = convertToNormalizedSyllables(word1, lang)
     word2 = convertToNormalizedSyllables(word2, lang)
 
-    // console.log(word1);
-    // console.log(word2);
-
+    if (debug) {
+        console.log(word1);
+        console.log(word2);
+    }
     // var end = Math.min(3, Math.min(word1.length, word2.length));
 
     var check = Math.min(word1.length, word2.length);
@@ -150,8 +151,8 @@ function getRapValue(word1, word2, lang) {
         if (getSelbstLautBlock(s1) && (getSelbstLautBlock(s1) == getSelbstLautBlock(s2))){
             syllableVal += 6;
 
-            syllableVal += getSuffixPrefixScore(s1, s2, getPrefix);
-            syllableVal += getSuffixPrefixScore(s1, s2, getSuffix);
+            syllableVal *= getSuffixPrefixScore(s1, s2, getPrefix);
+            syllableVal *= getSuffixPrefixScore(s1, s2, getSuffix);
         }
         else if(j == 0 )
             break;
@@ -162,18 +163,21 @@ function getRapValue(word1, word2, lang) {
         // if (getSuffix(s1) && (getSuffix(s1) == getSuffix(s2)))
         //     syllableVal += 2;
 
-
-        // console.log("getPrefix("+s1+"):" + getPrefix(s1));
-        // console.log("getPrefix("+s2+"):" + getPrefix(s2));
-
-        // console.log("getSuffix("+s1+"):" + getSuffix(s1));
-        // console.log("getSuffix("+s2+"):" + getSuffix(s2));
+        
         // if (j == 0 ) // last syllable
         //     syllableVal = syllableVal * 4;
 
         syllableVal = Math.pow(syllableVal, 1/j);
         score += syllableVal;
-        // console.log(s1 + " " +s2 + " " + syllableVal);
+        if (debug) {
+            console.log("getPrefix("+s1+"):" + getPrefix(s1));
+            console.log("getPrefix("+s2+"):" + getPrefix(s2));
+
+            console.log("getSuffix("+s1+"):" + getSuffix(s1));
+            console.log("getSuffix("+s2+"):" + getSuffix(s2));
+
+            console.log(s1 + " " +s2 + " " + syllableVal);
+        }
     }
 
     var numSyl1 = word1.length;
@@ -188,9 +192,6 @@ function getRapValue(word1, word2, lang) {
     // console.log(score);
 
     return score;
-
-    console.log(hyphenator.hyphenateWord("de", word1))
-    console.log(hyphenator.hyphenateWord("de", word2))
 
     //a, e, i, o, u, ä, ö, ü
 }

@@ -61,4 +61,3 @@ var hyphenator = require('./hyphenator');
 // console.log(rappable.getRapValue("auf", "überhaupt", "de", true))
 
 console.log(rappable.getRapValue("leben", "konnten", "de", true))
-

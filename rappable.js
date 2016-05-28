@@ -22,11 +22,11 @@ function getFuncForLang(lang){
 }
 
 // var tonlautList=[a|e|i|o|u|ɝ|ɻ̊|ä|ü|ö];
-
+var minRapValue = 0.8;
 function isRappable(word1, word2, lang) {
     if (!lang) lang = 'en';
     var val = getRapValue(word1, word2, lang);
-    return val >= 0.8;
+    return val >= minRapValue;
 }
 
 function convertToNormalizedSyllables(word, lang){
@@ -155,4 +155,5 @@ service.getRapValue = getRapValue;
 service.isRappable = isRappable;
 service.metaphone = metaphone;
 service.koellnrap = koellnrap;
+service.minRapValue = minRapValue;
 module.exports = service;

@@ -9,10 +9,9 @@ var
     // [ /ei/g               ,  'ɝɻ̊'  ],
     // [ /eu/g               ,  'oi'  ],
     // [ /äu/g               ,  'oi'  ]
-    [ /dern$/g            , 'dɐn'   ],
-    [ /der$/g             , 'dɐ'   ],
-    [ /ter$/g             , 'tɐ'   ],
-    [ /da$/g              , 'dɐ'   ],
+    [ /dern$/g            , 'dan'   ],
+    [ /der$/g             , 'da'   ],
+    [ /ter$/g             , 'ta'   ],
     [ /en$/g              , 'ən'   ],
     // [ /te$/g              , 'tə'   ],
     [ /ai/g               ,  'ɝ'  ],

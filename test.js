@@ -43,7 +43,8 @@ describe('rappable', function() {
         { comp:["amerikanischen", "Wirtschaftskatastrophe"],      lang:'de', value:false},
         { comp:["wollten", "Geschichte"],      lang:'de', value:false},
         { comp:["regeln", "mögliche"],         lang:'de', value:false},
-        { comp:["jeder", "des"],               lang:'de', value:false}
+        { comp:["jeder", "des"],               lang:'de', value:false},
+        { comp:["Bolschewismus", "Weiterbildung"],               lang:'de', value:false}
 
     ];
 

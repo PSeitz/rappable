@@ -26,7 +26,7 @@ function getFuncForLang(lang){
 function isRappable(word1, word2, lang) {
     if (!lang) lang = 'en';
     var val = getRapValue(word1, word2, lang);
-    return val >= 7;
+    return val >= 0.8;
 }
 
 function convertToNormalizedSyllables(word, lang){
@@ -52,9 +52,6 @@ function getPrefix(syllable){
 
 function getSuffix(syllable){
     var match = syllable.match(/[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]+(.*)/gi)
-    // var match = syllable.match(/(?<=[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]).*/gi)
-    // var match = syllable.match(/(?<=[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö])(.*)/gi)
-
     match = checkReturnMatch(match);
     return match.replace(/[a|ɐ|e|ə|i|o|u|ɝ|ɻ̊|ä|ü|ö]*/gi, '')
 }
@@ -65,6 +62,7 @@ function getSelbstLautBlock(syllable){
 }
 
 function getSuffixPrefixScore(s1, s2, func){
+
     var pref1 = func(s1);
     var pref2 = func(s2);
     if (!pref1 && !pref2) { return 1; }
@@ -83,6 +81,12 @@ function getSuffixPrefixScore(s1, s2, func){
     return 0.8;
 }
 
+function getSelbstlautScore(s1, s2){
+    if (getSelbstLautBlock(s1) && (getSelbstLautBlock(s1) == getSelbstLautBlock(s2)))
+        return 0.6;
+    return 0;
+}
+
 function getRapValue(word1, word2, lang, debug) {
     if (!lang) lang = 'en';
 
@@ -97,25 +101,20 @@ function getRapValue(word1, word2, lang, debug) {
 
     var check = Math.min(word1.length, word2.length);
 
-    var firstScore=8;
+    var prevScore = 1;
     var score = 0;
     var j = 0;
     for (var i = check; i --> 0;) {
         j++;
         var s1 = word1[word1.length - j], s2 = word2[word2.length - j];
 
-        var syllableVal = 0;
-        if (getSelbstLautBlock(s1) && (getSelbstLautBlock(s1) == getSelbstLautBlock(s2))){
-            syllableVal += 6;
+        var syllableVal = getSelbstlautScore(s1, s2);
 
-            syllableVal *= getSuffixPrefixScore(s1, s2, getPrefix);
-            syllableVal *= getSuffixPrefixScore(s1, s2, getSuffix);
-        }
-        else if(j == 0 )
-            break;
+        syllableVal *= getSuffixPrefixScore(s1, s2, getPrefix);
+        syllableVal *= getSuffixPrefixScore(s1, s2, getSuffix);
 
-        syllableVal = Math.pow(syllableVal, 1/j) * firstScore / 8;
-        if (j==1) firstScore = syllableVal;
+        syllableVal = syllableVal * prevScore; // if first syllable is low, all will be low
+        prevScore = syllableVal;
         score += syllableVal;
         if (debug) {
             console.log("getPrefix("+s1+"):" + getPrefix(s1));
@@ -140,8 +139,6 @@ function getRapValue(word1, word2, lang, debug) {
     // console.log(score);
 
     return score;
-
-    //a, e, i, o, u, ä, ö, ü
 }
 
 

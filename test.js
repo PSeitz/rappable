@@ -44,7 +44,11 @@ describe('rappable', function() {
         { comp:["wollten", "Geschichte"],      lang:'de', value:false},
         { comp:["regeln", "mögliche"],         lang:'de', value:false},
         { comp:["jeder", "des"],               lang:'de', value:false},
-        { comp:["Bolschewismus", "Weiterbildung"],               lang:'de', value:false}
+        { comp:["sondern", "mantel"],               lang:'de', value:false},
+        { comp:["Bolschewismus", "Weiterbildung"],  lang:'de', value:false},
+        { comp:["unbekannter", "erdrückendes"],     lang:'de', value:false},
+        { comp:["erwacht", "etwa"],             lang:'de', value:false},
+        { comp:["auf", "überhaupt"],            lang:'de', value:false}
 
     ];
 

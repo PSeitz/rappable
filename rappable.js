@@ -61,12 +61,14 @@ function getSelbstLautBlock(syllable){
     return checkReturnMatch(match);
 }
 
-function getSuffixPrefixScore(s1, s2, func){
+function getSuffixPrefixScore(s1, s2, func, isSuffix){
 
     var pref1 = func(s1);
     var pref2 = func(s2);
-    if (!pref1 && !pref2) { return 1; }
-    if (!pref1 && pref2 || pref1 && !pref2)  { return 0.6; }
+    if (!pref1 && !pref2) { return 0.8; }
+    if (!pref1 && pref2 || pref1 && !pref2)  { 
+        if (isSuffix) return .45; return 0.6; 
+    }
     if (pref1) {
         if (pref1 == pref2)
             return 1.75;
@@ -78,7 +80,7 @@ function getSuffixPrefixScore(s1, s2, func){
             }
         }
     }
-    return 0.8;
+    return isSuffix ? .6 : 0.8; 
 }
 
 function getSelbstlautScore(s1, s2){
@@ -110,18 +112,18 @@ function getRapValue(word1, word2, lang, debug) {
 
         var syllableVal = getSelbstlautScore(s1, s2);
 
-        syllableVal *= getSuffixPrefixScore(s1, s2, getPrefix);
-        syllableVal *= getSuffixPrefixScore(s1, s2, getSuffix);
+        syllableVal *= getSuffixPrefixScore(s1, s2, getPrefix, false);
+        syllableVal *= getSuffixPrefixScore(s1, s2, getSuffix, true);
 
-        syllableVal = syllableVal * prevScore; // if first syllable is low, all will be low
+        syllableVal = (syllableVal * prevScore); // if first syllable is low, all will be low
         prevScore = syllableVal;
         score += syllableVal;
         if (debug) {
-            console.log("getPrefix("+s1+"):" + getPrefix(s1));
-            console.log("getPrefix("+s2+"):" + getPrefix(s2));
+            // console.log("getPrefix("+s1+"):" + getPrefix(s1));
+            // console.log("getPrefix("+s2+"):" + getPrefix(s2));
 
-            console.log("getSuffix("+s1+"):" + getSuffix(s1));
-            console.log("getSuffix("+s2+"):" + getSuffix(s2));
+            // console.log("getSuffix("+s1+"):" + getSuffix(s1));
+            // console.log("getSuffix("+s2+"):" + getSuffix(s2));
 
             console.log(s1 + " " +s2 + " " + syllableVal);
         }
